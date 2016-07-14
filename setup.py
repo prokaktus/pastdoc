@@ -22,6 +22,9 @@ setup(
     packages=[
         'pastdoc'
     ],
+    install_requires=[
+        'click'
+    ],
     entry_points={
         'console_scripts': ['pastdoc=pastdoc.cli:main']
     },
