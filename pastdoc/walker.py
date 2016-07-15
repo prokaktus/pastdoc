@@ -28,19 +28,18 @@ def is_good_dir(dirname):
 
 
 def walk_over(entry):
+    entry = os.path.abspath(entry)
     prefix, module = os.path.split(entry)
     if not module:
         prefix, module = os.path.split(module)
     prefix_len = len(prefix)
-    print(prefix)
-    print(prefix_len)
 
     for dirpath, dirs, filenames in os.walk(entry):
         dirs[:] = [d for d in dirs if is_good_dir(d)]
-        dirpath = dirpath[prefix_len:]
+        dirprefix = dirpath[prefix_len:]
         for filename in filenames:
             _, ext = os.path.splitext(filename)
             if ext != '.py':
                 continue
 
-            yield to_module(dirpath, filename)
+            yield to_module(dirprefix, filename), os.path.join(dirpath, filename)
