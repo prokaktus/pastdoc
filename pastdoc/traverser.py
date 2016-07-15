@@ -22,7 +22,7 @@ class Traverser(ast.NodeVisitor):
 
     def _extract_docstring(self, node):
         docstring = ast.get_docstring(node)
-        self._bucket.append((self.nesting_level, node.name, docstring, ))
+        self._bucket.append((self.nesting_level, node.name, docstring, node.lineno))
         return self._bucket
 
     @nesting

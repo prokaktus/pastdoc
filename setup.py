@@ -1,4 +1,5 @@
 import sys
+import os
 from setuptools import setup
 from pastdoc import __version__
 
@@ -12,6 +13,12 @@ PASTDoc. Python Doc Generator, working with AST.
 """
 
 
+# get requirements list
+current = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(current, 'requirements', 'main.txt')) as fp:
+    requirements = fp.read().splitlines()
+
+
 setup(
     name="pastdoc",
     url="https://github.com/prokaktus/pastdoc",
@@ -23,7 +30,7 @@ setup(
         'pastdoc'
     ],
     install_requires=[
-        'click'
+        requirements
     ],
     entry_points={
         'console_scripts': ['pastdoc=pastdoc.cli:main']
